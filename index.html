@@ -80,7 +80,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
    * So when you'll init the plugin, follow how it's done in plugin documentation.
    */
   var d = new Date();
-    d.setDate(d.getDate() + 60);
+  
+  var deadline = '2018-05-12';
+  
+  function getTimeRemaining(endtime){
+	  var t = Date.parse(endtime) - Date.parse(new Date());
+	  var seconds = Math.floor( (t/1000) % 60 );
+	  var minutes = Math.floor( (t/1000/60) % 60 );
+	  var hours = Math.floor( (t/(1000*60*60)) % 24 );
+	  var days = Math.floor( t/(1000*60*60*24) );
+	  return {
+		'total': t,
+		'days': days,
+		'hours': hours,
+		'minutes': minutes,
+		'seconds': seconds
+	  };
+	}
+
+  
+    d.setDate(d.getDate() + getTimeRemaining(deadline).days);
 
     // default example
     simplyCountdown('.simply-countdown-one', {
